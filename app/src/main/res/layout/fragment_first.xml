@@ -16,11 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            app:layout_constraintBottom_toTopOf="@id/textview_first"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RequestRoot"
             app:layout_constraintTop_toTopOf="parent" />
-        />
 
         <TextView
             android:id="@+id/textview_first"
@@ -32,5 +30,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_first" />
+
+        <Button
+            android:id="@+id/RequestRoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="requestRoot"
+            android:text="RequestRoot"
+            app:layout_constraintEnd_toStartOf="@+id/button_first"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/commandBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="Type the command"
+            android:ems="10"
+            app:layout_constraintBottom_toTopOf="@+id/textview_first"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/enterCommand"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:onClick="enterCommand"
+            android:text="Enter"
+            app:layout_constraintBottom_toBottomOf="@+id/commandBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/commandBox"
+            app:layout_constraintTop_toTopOf="@+id/commandBox" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

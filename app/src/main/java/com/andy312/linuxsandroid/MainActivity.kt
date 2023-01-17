@@ -1,16 +1,24 @@
 package com.andy312.linuxsandroid
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.andy312.linuxsandroid.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+
+public var mainRuntime:Runtime = Runtime.getRuntime();
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,5 +65,24 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun requestRoot(view: View) {
+        mainRuntime.exec("su");
+    }
+
+    fun enterCommand(view: View) {
+        val commandText = findViewById<EditText>(R.id.commandBox)
+        val textOut = findViewById<TextView>(R.id.textview_first)
+
+        val theProcess:Process =mainRuntime.exec(commandText.text.toString())
+
+        try{
+            theProcess.waitFor()
+            var out = BufferedReader(InputStreamReader(theProcess.getInputStream()))
+            textOut.text = out.readLine();
+        } catch (e: IOException){
+            textOut.text = e.printStackTrace().toString();
+        }
     }
 }
