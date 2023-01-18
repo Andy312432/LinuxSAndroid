@@ -68,7 +68,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun requestRoot(view: View) {
-        mainRuntime.exec("su");
+        val testval=mainRuntime.exec("su");
+        //mainRuntime.exec("su");
     }
 
     fun enterCommand(view: View) {
