@@ -18,7 +18,6 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-public var mainRuntime:Runtime = Runtime.getRuntime();
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,16 +67,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun requestRoot(view: View) {
-        val testval=mainRuntime.exec("su");
+        Runtime.getRuntime().exec("su");
         //mainRuntime.exec("su");
     }
 
     fun enterCommand(view: View) {
         val commandText = findViewById<EditText>(R.id.commandBox)
-        val textOut = findViewById<TextView>(R.id.textview_first)
+        val textOut = findViewById<TextView>(R.id.logsee)
 
-        val theProcess:Process =mainRuntime.exec(commandText.text.toString())
-
+        val theProcess:Process =Runtime.getRuntime().exec(commandText.text.toString())
+        //remove same runtime since still no root access even
         try{
             theProcess.waitFor()
             var out = BufferedReader(InputStreamReader(theProcess.getInputStream()))
