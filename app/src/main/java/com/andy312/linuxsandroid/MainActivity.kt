@@ -1,5 +1,6 @@
 package com.andy312.linuxsandroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,9 +15,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.andy312.linuxsandroid.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
-import java.io.BufferedReader
+import com.topjohnwu.superuser.CallbackList
+import com.topjohnwu.superuser.Shell
 import java.io.IOException
-import java.io.InputStreamReader
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,9 +25,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+
+    init{
+        Shell.enableVerboseLogging = BuildConfig.DEBUG
+        Shell.setDefaultBuilder(Shell.Builder.create()
+            .setFlags(Shell.FLAG_REDIRECT_STDERR)
+            .setTimeout(10)
+        );
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
+
+        /*Shell.getShell { shell: Shell? ->
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }*/
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -67,22 +83,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun requestRoot(view: View) {
-        Runtime.getRuntime().exec("su");
-        //mainRuntime.exec("su");
+        val textOut = findViewById<TextView>(R.id.logsee)
+        var result: Shell.Result?
+        result = Shell.cmd("su").exec()
+        textOut.text = result.getOut().toString()
     }
 
     fun enterCommand(view: View) {
         val commandText = findViewById<EditText>(R.id.commandBox)
         val textOut = findViewById<TextView>(R.id.logsee)
+        var result:String? = ""
 
-        val theProcess:Process =Runtime.getRuntime().exec(commandText.text.toString())
-        //remove same runtime since still no root access even
-        try{
-            theProcess.waitFor()
-            var out = BufferedReader(InputStreamReader(theProcess.getInputStream()))
-            textOut.text = out.readLine();
-        } catch (e: IOException){
-            textOut.text = e.printStackTrace().toString();
+        var callbackList: List<String?> = object : CallbackList<String?>() {
+            override fun onAddElement(s: String?) {
+                result += s + "\n"
+                textOut.text = result
+            }
         }
+
+        Shell.cmd(commandText.text.toString())
+            .to(callbackList)
+            .submit()
     }
 }
