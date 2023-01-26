@@ -1,5 +1,6 @@
 package com.andy312.linuxsandroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         Shell.setDefaultBuilder(Shell.Builder.create()
             .setFlags(Shell.FLAG_REDIRECT_STDERR)
             .setTimeout(10)
-        );
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +71,11 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         when(item.itemId) {
             R.id.menu_new -> {
-                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_to_addnew)
-                item.isVisible = false
+                val intent = Intent(this, add_new_activity::class.java)
+                startActivity(intent)
             }
             R.id.chroot_settings ->
-                Snackbar.make(findViewById(R.id.nav_host_fragment_content_main), "Should be settings", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.nav_host_fragment_content_main), "Should be settings", Snackbar.LENGTH_SHORT).show()
             else -> return false
         }
         return true
@@ -88,15 +89,14 @@ class MainActivity : AppCompatActivity() {
 
     fun requestRoot(view: View) {
         val textOut = findViewById<TextView>(R.id.logsee)
-        var result: Shell.Result?
-        result = Shell.cmd("su").exec()
-        textOut.text = result.getOut().toString()
+        var result: Shell.Result = Shell.cmd("su").exec()
+        textOut.text = result.out.toString()
     }
 
     fun enterCommand(view: View) {
         val commandText = findViewById<EditText>(R.id.commandBox)
         val textOut = findViewById<TextView>(R.id.logsee)
-        var result:String? = ""
+        var result:String = ""
 
         var callbackList: List<String?> = object : CallbackList<String?>() {
             override fun onAddElement(s: String?) {

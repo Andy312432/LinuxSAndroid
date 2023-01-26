@@ -9,19 +9,5 @@
         android:id="@+id/FirstFragment"
         android:name="com.andy312.linuxsandroid.FirstFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_first">
-        <action
-            android:id="@+id/action_to_addnew"
-            app:destination="@id/navigation"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
-    </fragment>
-    <navigation android:id="@+id/navigation"
-        app:startDestination="@id/new_config">
-        <fragment
-            android:id="@+id/new_config"
-            android:name="com.andy312.linuxsandroid.new_config"
-            android:label="fragment_new_config"
-            tools:layout="@layout/fragment_new_config" />
-    </navigation>
+        tools:layout="@layout/fragment_first"/>
 </navigation>

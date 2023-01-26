@@ -43,16 +43,19 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.core:core-ktx:1.9.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //libsu
+    //libsu, ref: https://github.com/topjohnwu/libsu
     def libsuVersion = '5.0.4'
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
     //APIs for creating root services. Depends on ":core"
     implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
     //Provides remote file system support
     /*implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"*/
+
+    //appintro, ref: https://github.com/AppIntro/AppIntro
+    implementation 'com.github.AppIntro:AppIntro:6.2.0'
 }

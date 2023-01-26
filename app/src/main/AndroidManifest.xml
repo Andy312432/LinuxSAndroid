@@ -12,6 +12,9 @@
         android:theme="@style/Theme.LinuxSAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".add_new_activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
