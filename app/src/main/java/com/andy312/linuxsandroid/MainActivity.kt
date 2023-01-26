@@ -1,6 +1,5 @@
 package com.andy312.linuxsandroid
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +16,6 @@ import com.andy312.linuxsandroid.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import com.topjohnwu.superuser.CallbackList
 import com.topjohnwu.superuser.Shell
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,9 +69,12 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when(item.itemId) {
-            R.id.menu_new ->
+            R.id.menu_new -> {
                 findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_to_addnew)
-            R.id.chroot_settings -> Snackbar.make(findViewById(R.id.nav_host_fragment_content_main), "Should be settings", Snackbar.LENGTH_SHORT).show();
+                item.isVisible = false
+            }
+            R.id.chroot_settings ->
+                Snackbar.make(findViewById(R.id.nav_host_fragment_content_main), "Should be settings", Snackbar.LENGTH_SHORT).show();
             else -> return false
         }
         return true

@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_to_addnew"
-            app:destination="@id/navigation" />
+            app:destination="@id/navigation"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/new_config">
