@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/requestRootDetail"
+        android:id="@+id/chooseDistroDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -28,14 +28,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/requestRootTitle"
+        android:id="@+id/chooseDistroTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/requestRootTitle"
         android:textSize="@dimen/appintro_headtext_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/requestRootDetail"
+        app:layout_constraintBottom_toTopOf="@+id/chooseDistroDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

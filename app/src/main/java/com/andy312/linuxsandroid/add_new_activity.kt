@@ -21,6 +21,7 @@ class add_new_activity : AppIntro2() {
         isWizardMode = true
         setTransformer(AppIntroPageTransformerType.Zoom)
         setProgressIndicator()
+
         addSlide(
             AppIntroFragment.createInstance(
                 title = "Welcome",
@@ -30,12 +31,7 @@ class add_new_activity : AppIntro2() {
         if (!add_new_script.requestRoot()) {
             addSlide(askRootInstance())
         }
-        addSlide(
-            AppIntroFragment.createInstance(
-                title = "Distribution",
-                description = "Enjoy!"
-            )
-        )
+        addSlide(chooseDistroInstance())
         addSlide(
             AppIntroFragment.createInstance(
                 title = "Desktop Environment",
@@ -69,7 +65,7 @@ class add_new_activity : AppIntro2() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-        ): View? = inflater.inflate(R.layout.ask_root_layout, container, false)
+        ): View? = inflater.inflate(R.layout.add_new_ask_root, container, false)
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
@@ -78,7 +74,7 @@ class add_new_activity : AppIntro2() {
             askRootButton.setOnClickListener {add_new_script.requestRoot()}
 
             val moreRootInfo: TextView = view.findViewById(R.id.requestRootInfo)
-            moreRootInfo.setOnClickListener {/*TODO*/}//說明Root的重要
+            moreRootInfo.setOnClickListener {/*TODO*/}//The importance of root env
         }
 
         override val isPolicyRespected: Boolean
@@ -88,6 +84,19 @@ class add_new_activity : AppIntro2() {
             Snackbar.make(requireView() , "No root Access", Snackbar.LENGTH_SHORT).show()
         }
     }
+
+    class chooseDistroInstance : Fragment()  {
+
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? = inflater.inflate(R.layout.add_new_distribution, container, false)
+
+        //We don't need to add a slidePolicy because 'Ubuntu' is checked in default,
+        //and there won't be a chance that nothing is checked
+    }
+
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
         Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()

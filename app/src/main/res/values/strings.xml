@@ -1,17 +1,30 @@
 <resources>
     <string name="app_name">LinuxSAndroid</string>
     <string name="settings">Settings</string>
+
+    <!--Add New-->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="moreInfo">More Info…</string>
+
+    <!--welcome-->
     <string name="welcomeText">
         Hello! Welcome to LinuxSAndroid.\n
         (aka Linux Subsystem for android)\n
         To add a new chroot environment, select one of the distribution below.
     </string>
+    <!--Ask for root-->
+    <string name="requestRootTitle">Root Access</string>
     <string name="requestRootDetail">
         We need to have root access to create chroot environment.\n
         (or spawn task using root.)
     </string>
-    <string name="requestRootTitle">Root Access</string>
-    <string name="moreInfo">More Info...</string>
+    <!--Select Distro-->
+    <string name="chooseDistroTitle">Linux Distribution</string>
+    <string name="chooseDistroDetail">
+        Choose one of the distribution below.\n
+        Currently only supports Ubuntu(so why choose)</string>
+    <string name="ubuntuInfo">
+        Ubuntu is a user-friendly linux distro.
+    </string>
 </resources>
