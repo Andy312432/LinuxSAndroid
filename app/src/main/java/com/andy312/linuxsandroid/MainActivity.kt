@@ -87,12 +87,6 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-    fun requestRoot(view: View) {
-        val textOut = findViewById<TextView>(R.id.logsee)
-        var result: Shell.Result = Shell.cmd("su").exec()
-        textOut.text = result.out.toString()
-    }
-
     fun enterCommand(view: View) {
         val commandText = findViewById<EditText>(R.id.commandBox)
         val textOut = findViewById<TextView>(R.id.logsee)

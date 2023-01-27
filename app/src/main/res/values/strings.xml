@@ -8,4 +8,10 @@
         (aka Linux Subsystem for android)\n
         To add a new chroot environment, select one of the distribution below.
     </string>
+    <string name="requestRootDetail">
+        We need to have root access to create chroot environment.\n
+        (or spawn task using root.)
+    </string>
+    <string name="requestRootTitle">Root Access</string>
+    <string name="moreInfo">More Info...</string>
 </resources>
