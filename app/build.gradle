@@ -58,4 +58,5 @@ dependencies {
 
     //appintro, ref: https://github.com/AppIntro/AppIntro
     implementation 'com.github.AppIntro:AppIntro:6.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.8.0"
 }

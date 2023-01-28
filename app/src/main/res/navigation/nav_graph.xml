@@ -9,5 +9,5 @@
         android:id="@+id/FirstFragment"
         android:name="com.andy312.linuxsandroid.FirstFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_first"/>
+        tools:layout="@layout/fragment_main"/>
 </navigation>

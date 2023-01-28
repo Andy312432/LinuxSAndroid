@@ -12,6 +12,7 @@ import com.github.appintro.AppIntro2
 import com.github.appintro.AppIntroFragment
 import com.github.appintro.AppIntroPageTransformerType
 import com.github.appintro.SlidePolicy
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -31,16 +32,11 @@ class add_new_activity : AppIntro2() {
         if (!add_new_script.requestRoot()) {
             addSlide(askRootInstance())
         }
+        addSlide(askTermuxInstance())
         addSlide(chooseDistroInstance())
         addSlide(
             AppIntroFragment.createInstance(
                 title = "Desktop Environment",
-                description = "Enjoy!"
-            )
-        )
-        addSlide(
-            AppIntroFragment.createInstance(
-                title = "Termux?",
                 description = "Enjoy!"
             )
         )
@@ -74,7 +70,13 @@ class add_new_activity : AppIntro2() {
             askRootButton.setOnClickListener {add_new_script.requestRoot()}
 
             val moreRootInfo: TextView = view.findViewById(R.id.requestRootInfo)
-            moreRootInfo.setOnClickListener {/*TODO*/}//The importance of root env
+            moreRootInfo.setOnClickListener {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.moreInfo)
+                    .setMessage("Root is an important thing in Linux, so as to Android.")//TODO
+                    .setPositiveButton("Sure",null)
+                    .create().show()
+            }//The importance of root env
         }
 
         override val isPolicyRespected: Boolean
@@ -85,14 +87,27 @@ class add_new_activity : AppIntro2() {
         }
     }
 
-    class chooseDistroInstance : Fragment()  {
+    class askTermuxInstance : Fragment(), SlidePolicy {
 
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-        ): View? = inflater.inflate(R.layout.add_new_distribution, container, false)
+        ): View? = inflater.inflate(R.layout.add_new_ask_termux, container, false)
 
+        override val isPolicyRespected: Boolean
+            get() = add_new_script.requestRoot()
+
+        override fun onUserIllegallyRequestedNextPage() {
+            Snackbar.make(requireView() , "No root Access", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+    class chooseDistroInstance : Fragment()  {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? = inflater.inflate(R.layout.add_new_distribution, container, false)
         //We don't need to add a slidePolicy because 'Ubuntu' is checked in default,
         //and there won't be a chance that nothing is checked
     }

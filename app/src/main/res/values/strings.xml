@@ -6,6 +6,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="moreInfo">More Info…</string>
+    <string name="install">Install</string>
 
     <!--welcome-->
     <string name="welcomeText">
@@ -18,6 +19,11 @@
     <string name="requestRootDetail">
         We need to have root access to create chroot environment.\n
         (or spawn task using root.)
+    </string>
+    <!--Ask for Termnux-->
+    <string name="requestTermuxTitle">Termux and Busybox</string>
+    <string name="requestTermuxDetail">
+        We need to have termux(app) and busybox environment in order to make chroot environment.
     </string>
     <!--Select Distro-->
     <string name="chooseDistroTitle">Linux Distribution</string>
